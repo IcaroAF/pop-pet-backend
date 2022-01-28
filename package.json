@@ -1,0 +1,37 @@
+{
+  "name": "pop-pet-package",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/IcaroAF/pop-pet-backend",
+  "author": "Icaro Assis <icaroassisfreitas@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint src --max-warnings=0"
+  },
+  "lint-staged": {
+    "src/**/*": [
+      "yarn lint --fix"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.2",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^1.0.1",
+    "pg": "^8.7.1",
+    "yup": "^0.32.11",
+    "yup-locales": "^1.2.2"
+  }
+}
