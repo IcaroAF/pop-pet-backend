@@ -6,6 +6,7 @@
   "author": "Icaro Assis <icaroassisfreitas@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "nodemon ./src/index.js",
     "lint": "eslint src --max-warnings=0"
   },
   "lint-staged": {
