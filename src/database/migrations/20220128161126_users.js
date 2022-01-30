@@ -8,7 +8,7 @@ exports.up = (knex) => {
   return knex.schema.createTable('users', (table) => {
     table.increments('id')
     table.text('name').notNullable()
-    table.integer('email').notNullable().unique()
+    table.text('email').notNullable().unique()
     table.text('password')
     table.text('cpf').notNullable().unique()
     table.text('zipcode').notNullable()
@@ -19,8 +19,8 @@ exports.up = (knex) => {
     table.text('ref_address')
     table.text('phone_1').notNullable()
     table.text('phone_2').notNullable()
-    table.text('photo').notNullable()
-    table.text('role').notNullable()
+    table.text('photo')
+    table.text('role').notNullable().defaultTo('user')
   })
 }
 
