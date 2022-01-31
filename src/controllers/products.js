@@ -2,6 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 const knex = require('../connection')
 const buyProductsSchema = require('../schemas/buyProductsSchema')
+const addProductSchema = require('../schemas/addProductSchema')
 
 const listAllProducts = async (req, res) => {
   try {
@@ -35,7 +36,43 @@ const buyProducts = async (req, res) => {
   }
 }
 
+const createProduct = async (req, res) => {
+  const { name, price, description, category, amount, img } = req.body
+
+  try {
+    await addProductSchema.validate(req.body)
+
+    const checkSameProduct = await knex('products').where('name', name)
+
+    if (checkSameProduct[0]) {
+      return res
+        .status(400)
+        .json('Já existe um produto cadastrado com esse nome')
+    }
+
+    const productObject = {
+      name,
+      price,
+      description,
+      category,
+      amount,
+      img
+    }
+
+    const query = await knex('products').insert(productObject)
+
+    if (query.rowCount === 0) {
+      return res.status(400).json('Não foi possível adicionar o produto')
+    }
+
+    return res.status(200).json('Produto adicionado com sucesso')
+  } catch (error) {
+    return res.status(400).json(error.message)
+  }
+}
+
 module.exports = {
   listAllProducts,
-  buyProducts
+  buyProducts,
+  createProduct
 }

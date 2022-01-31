@@ -13,5 +13,6 @@ routes.post('/users', users.signUp)
 routes.post('/login', login.signIn)
 routes.use(signInVerifier)
 routes.get('/resume', resume.getResume)
+routes.post('/add-product', products.createProduct)
 
 module.exports = routes
