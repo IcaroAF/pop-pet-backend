@@ -8,6 +8,7 @@ exports.up = (knex) => {
   return knex.schema.createTable('users', (table) => {
     table.increments('id')
     table.text('name').notNullable()
+    table.text('username').notNullable()
     table.text('email').notNullable().unique()
     table.text('password')
     table.text('cpf').notNullable().unique()

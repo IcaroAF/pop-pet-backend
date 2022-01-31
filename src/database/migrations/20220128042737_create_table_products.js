@@ -10,6 +10,7 @@ exports.up = (knex) => {
     table.text('name').notNullable()
     table.integer('price').notNullable()
     table.text('description').notNullable()
+    table.text('category').notNullable()
     table.integer('amount').notNullable()
     table.text('img').notNullable()
   })

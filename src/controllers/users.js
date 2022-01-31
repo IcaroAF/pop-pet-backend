@@ -6,6 +6,7 @@ const signUpUserSchema = require('../schemas/signUpUserSchema')
 const signUp = async (req, res) => {
   const {
     name,
+    username,
     email,
     password,
     cpf,
@@ -39,6 +40,7 @@ const signUp = async (req, res) => {
 
     const userObject = {
       name,
+      username,
       email,
       password: encryptedPassword,
       cpf,
