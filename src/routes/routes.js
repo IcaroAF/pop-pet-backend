@@ -14,5 +14,6 @@ routes.post('/login', login.signIn)
 routes.use(signInVerifier)
 routes.get('/resume', resume.getResume)
 routes.post('/add-product', products.createProduct)
+routes.delete('/remove-product/:productId', products.removeProduct)
 
 module.exports = routes

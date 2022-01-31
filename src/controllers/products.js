@@ -71,8 +71,31 @@ const createProduct = async (req, res) => {
   }
 }
 
+const removeProduct = async (req, res) => {
+  const id = Number(req.params.productId)
+
+  const productData = await knex('products').where('id', id)
+
+  if (productData.length === 0) {
+    return res.status(404).json('O produto com este id não foi encontrado')
+  }
+
+  try {
+    const productRemoved = await knex('products').delete().where('id', id)
+
+    if (productRemoved === 0) {
+      return res.status(400).json('Não foi possível remover o produto.')
+    }
+
+    return res.status(200).json('Produto removido com sucesso.')
+  } catch (error) {
+    return res.status(400).json(error.message)
+  }
+}
+
 module.exports = {
   listAllProducts,
   buyProducts,
-  createProduct
+  createProduct,
+  removeProduct
 }
