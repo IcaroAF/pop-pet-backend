@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const knex = require('../connection')
 const signUpUserSchema = require('../schemas/signUpUserSchema')
 
@@ -16,8 +17,7 @@ const signUp = async (req, res) => {
     city,
     state,
     ref_address,
-    phone_1,
-    phone_2,
+    phone,
     role
   } = req.body
 
@@ -50,10 +50,15 @@ const signUp = async (req, res) => {
       city,
       state,
       ref_address,
-      phone_1,
-      phone_2,
+      phone,
       role
     }
+
+    const user = userObject
+    const { password: userPassword, ...userData } = user
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: '8h'
+    })
 
     const query = await knex('users').insert(userObject)
 
@@ -61,7 +66,10 @@ const signUp = async (req, res) => {
       return res.status(400).json('Não foi possível cadastrar o cliente.')
     }
 
-    return res.status(200).json('Usuário cadastrado com sucesso')
+    return res.status(200).json({
+      userLogged: userData,
+      token
+    })
   } catch (error) {
     return res.status(400).json(error.message)
   }

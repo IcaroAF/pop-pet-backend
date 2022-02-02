@@ -8,8 +8,7 @@ const signUpUserSchema = yup.object().shape({
   zipcode: yup.string().required(),
   home_num: yup.string().required(),
   ref_address: yup.string(),
-  phone_1: yup.string().required(),
-  phone_2: yup.string().required(),
+  phone: yup.string().required(),
   role: yup.string()
 })
 
