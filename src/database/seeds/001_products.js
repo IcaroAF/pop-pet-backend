@@ -31,7 +31,7 @@ exports.seed = (knex) => {
           description: 'Ursinho de latex para cachorros',
           category: 'brinquedos',
           amount: 10,
-          img: 'https://staticpetz.stoom.com.br/fotos/1637692988275.jpg'
+          img: 'https://staticpetz.stoom.com.br/fotos/1597165847763.jpg'
         },
         {
           name: 'Ração Golden Fórmula Mini Bits Para Cães Adultos Pequeno Porte Sabor Carne e Arroz',

@@ -9,7 +9,7 @@ const signUpUserSchema = yup.object().shape({
   home_num: yup.string().required(),
   ref_address: yup.string(),
   phone: yup.string().required(),
-  role: yup.string()
+  is_admin: yup.string()
 })
 
 module.exports = signUpUserSchema

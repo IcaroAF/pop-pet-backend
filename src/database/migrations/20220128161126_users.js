@@ -20,7 +20,7 @@ exports.up = (knex) => {
     table.text('ref_address')
     table.text('phone').notNullable()
     table.text('photo')
-    table.text('role').notNullable().defaultTo('user')
+    table.boolean('is_admin').notNullable().defaultTo(false)
   })
 }
 

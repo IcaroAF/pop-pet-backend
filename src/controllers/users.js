@@ -18,7 +18,7 @@ const signUp = async (req, res) => {
     state,
     ref_address,
     phone,
-    role
+    is_admin
   } = req.body
 
   try {
@@ -51,7 +51,7 @@ const signUp = async (req, res) => {
       state,
       ref_address,
       phone,
-      role
+      is_admin
     }
 
     const user = userObject
