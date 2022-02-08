@@ -67,6 +67,7 @@ const signUp = async (req, res) => {
     }
 
     return res.status(200).json({
+      message: 'Usuário cadastrado com sucesso.',
       userLogged: userData,
       token
     })
