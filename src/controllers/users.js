@@ -25,9 +25,14 @@ const signUp = async (req, res) => {
     await signUpUserSchema.validate(req.body)
     const checkEmailQuery = await knex('users').where('email', email)
     const duplicateCPF = await knex('users').where('cpf', cpf)
+    const duplicateUser = await knex('users').where('username', username)
 
     if (checkEmailQuery[0]) {
       return res.status(400).json('O e-mail informado já está cadastrado.')
+    }
+
+    if (duplicateUser[0]) {
+      return res.status(400).json('Este nome de usuário está indisponível.')
     }
 
     if (duplicateCPF[0]) {
