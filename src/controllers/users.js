@@ -101,7 +101,7 @@ const editUser = async (req, res) => {
     const { user } = req
 
     if (email) {
-      const checkNewEmail = await knex('usuarios')
+      const checkNewEmail = await knex('users')
         .where('email', email)
         .whereNot('id', user.id)
 
@@ -111,7 +111,7 @@ const editUser = async (req, res) => {
     }
 
     if (cpf) {
-      const checkNewCPF = await knex('usuarios')
+      const checkNewCPF = await knex('users')
         .where('cpf', cpf)
         .whereNot('id', user.id)
 
@@ -120,7 +120,7 @@ const editUser = async (req, res) => {
       }
     }
 
-    const updateUserProfile = await knex('usuarios')
+    const updateUserProfile = await knex('users')
       .update({
         name,
         email,
