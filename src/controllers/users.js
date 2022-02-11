@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const knex = require('../connection')
 const signUpUserSchema = require('../schemas/signUpUserSchema')
+const editUserSchema = require('../schemas/editUserSchema')
 
 const signUp = async (req, res) => {
   const {
@@ -81,6 +82,72 @@ const signUp = async (req, res) => {
   }
 }
 
+const editUser = async (req, res) => {
+  const {
+    name,
+    email,
+    cpf,
+    zipcode,
+    street,
+    home_num,
+    city,
+    state,
+    ref_address,
+    phone
+  } = req.body
+
+  try {
+    await editUserSchema.validate(req.body)
+    const { user } = req
+
+    if (email) {
+      const checkNewEmail = await knex('usuarios')
+        .where('email', email)
+        .whereNot('id', user.id)
+
+      if (checkNewEmail.length > 0) {
+        return res.status(400).json('O e-mail informado já está cadastrado')
+      }
+    }
+
+    if (cpf) {
+      const checkNewCPF = await knex('usuarios')
+        .where('cpf', cpf)
+        .whereNot('id', user.id)
+
+      if (checkNewCPF.length > 0) {
+        return res.status(400).json('O CPF informado já está cadastrado')
+      }
+    }
+
+    const updateUserProfile = await knex('usuarios')
+      .update({
+        name,
+        email,
+        cpf,
+        zipcode,
+        street,
+        home_num,
+        city,
+        state,
+        ref_address,
+        phone
+      })
+      .where('id', user.id)
+
+    if (updateUserProfile !== 1) {
+      return res
+        .status(400)
+        .json('Não foi possível atualizar o cadastro do usuário.')
+    }
+
+    return res.status(200).json('Usuário atualizado com sucesso.')
+  } catch (error) {
+    return res.status(400).json(error.message)
+  }
+}
+
 module.exports = {
+  editUser,
   signUp
 }
